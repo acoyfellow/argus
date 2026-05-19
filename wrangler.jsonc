@@ -1,0 +1,28 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "argus",
+	"account_id": "bfcb6ac5b3ceaf42a09607f6f7925823",
+	"compatibility_date": "2026-05-19",
+	"compatibility_flags": [
+		"nodejs_als"
+	],
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
+	},
+	"ai": { "binding": "AI" },
+	"workflows": [
+		{
+			"name": "argus-research",
+			"binding": "ARGUS_RESEARCH",
+			"class_name": "ArgusResearchWorkflow",
+			"script_name": "argus-workflow"
+		}
+	],
+	"routes": [
+		{ "pattern": "argus.coey.dev", "custom_domain": true }
+	],
+	"workers_dev": true,
+	"preview_urls": true
+}
