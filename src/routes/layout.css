@@ -33,7 +33,7 @@ main { width: min(1220px, calc(100% - 30px)); margin: 0 auto; padding: 16px 0 72
 	text-decoration: none;
 }
 .nav-links a { padding: 6px 12px; font-size: .92rem; }
-.nav-links a:first-child, .primary, .run { background: #101010; color: #f3efef; }
+.nav-links a:first-child, .actions a.primary, button.run { background: #101010; color: #f3efef; }
 
 .hero { display: grid; grid-template-columns: minmax(0, 1.28fr) minmax(230px, .72fr); column-gap: clamp(22px, 6vw, 96px); row-gap: 18px; padding: 34px 0 24px; border-bottom: 1.5px solid #101010; }
 .hero .eyebrow { grid-column: 1 / -1; }
