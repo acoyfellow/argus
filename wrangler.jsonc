@@ -16,8 +16,7 @@
 		{
 			"name": "argus-research",
 			"binding": "ARGUS_RESEARCH",
-			"class_name": "ArgusResearchWorkflow",
-			"script_name": "argus-workflow"
+			"class_name": "ArgusResearchWorkflow"
 		}
 	],
 	"routes": [

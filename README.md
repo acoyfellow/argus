@@ -2,6 +2,8 @@
 
 **An evidence-assembly research agent running on Cloudflare Workflows.**
 
+[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/acoyfellow/argus)
+
 - **Demo:** [argus.coey.dev](https://argus.coey.dev) · fallback live Worker: [argus.coy.workers.dev](https://argus.coy.workers.dev)
 - **Paper:** [*Argus: Evidence Assembly for Scalable Deep Research Agents*](https://arxiv.org/abs/2605.16217)
 
@@ -45,22 +47,20 @@ bun run build
 
 `check` refreshes Wrangler types, clears generated build artifacts that confuse the scaffold's JS checking after a prior build, then runs Svelte type checking. `build` creates the SvelteKit Worker bundle and dry-runs the separate Workflow Worker deploy.
 
-## Deploy shape
+## Deploy
 
-The deployable system is two Workers configured in-repo:
+Click the **Deploy to Cloudflare** button above to clone and deploy a single Worker into your own account. The Worker includes:
 
-- `wrangler.workflow.jsonc` → `argus-workflow`, exporting `ArgusResearchWorkflow`
-- `wrangler.jsonc` → the SvelteKit site/API, bound to that remote workflow via `script_name`
+- the SvelteKit docs/demo/API surface;
+- the `ArgusResearchWorkflow` binding;
+- the Workers AI binding Argus uses for facets, evidence extraction, and synthesis.
 
-Deploy the workflow first, then the site:
+The repository build runs `vite build`, attaches the Workflow export to the generated SvelteKit Worker entrypoint, refreshes Wrangler types, and dry-runs `wrangler deploy`. That same single-worker configuration is verified locally by `bun run preview` and deploys with:
 
 ```bash
-wrangler deploy -c wrangler.workflow.jsonc
 bun run build
 wrangler deploy
 ```
-
-The eventual Deploy to Cloudflare flow should automate those exact two deploys, not introduce another architecture.
 
 ## Thesis
 

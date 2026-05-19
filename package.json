@@ -4,10 +4,10 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "wrangler dev -c wrangler.jsonc -c wrangler.workflow.jsonc --port 4173",
+		"dev": "bun run build && wrangler dev --port 4173",
 		"dev:ui": "vite dev",
-		"build": "wrangler types && vite build && wrangler deploy -c wrangler.workflow.jsonc --dry-run --outdir dist/workflow",
-		"preview": "wrangler dev .svelte-kit/cloudflare/_worker.js --port 4173",
+		"build": "vite build && node scripts/attach-workflow.mjs && wrangler types && wrangler deploy --dry-run --outdir dist/worker",
+		"preview": "bun run build && wrangler dev --port 4173",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "wrangler types && rm -rf .svelte-kit/output .svelte-kit/cloudflare .svelte-kit/cloudflare-tmp && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",

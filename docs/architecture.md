@@ -3,7 +3,8 @@
 ## Executable boundary
 
 - `/` is the public docs, demo, and dogfood site for `argus.coey.dev`.
-- `src/worker.ts` is the deployable Argus Workflow harness.
+- `src/workflow-runtime.ts` is the typed Argus Workflow harness body.
+- `scripts/attach-workflow.mjs` attaches the Workflow export to the generated SvelteKit Worker entrypoint so one Worker deploy contains site + harness.
 - `src/routes/api/research/` is the site-facing public contract: create a Workflow instance, poll its status, render its output.
 - The page never fakes research results; it renders Workflow output.
 
@@ -26,10 +27,10 @@ This fits dynamic Cloudflare workflows because the evidence state decides what w
 - The SvelteKit Worker starts and polls Workflow instances.
 - arXiv fetches are live receipts, not fixtures.
 
-Local multi-Worker dev runs through:
+Full local dev runs through:
 
 ```bash
 bun run dev
 ```
 
-That command loads both `wrangler.jsonc` and `wrangler.workflow.jsonc`, so the external Workflow binding resolves locally while Workers AI stays a real remote binding.
+That command builds the single deployable Worker, attaches the Workflow export, and runs Wrangler locally while Workers AI stays a real remote binding. The same one-config shape is what the Deploy to Cloudflare button consumes.
