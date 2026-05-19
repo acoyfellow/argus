@@ -48,6 +48,37 @@
 		busy = false;
 		notice = 'Argus is still working. Check back in a moment.';
 	}
+
+	const report = $derived(snapshot?.output);
+	const firstPass = $derived(report?.graph.evidence.filter((piece) => piece.coverage !== 'follow-up') ?? []);
+	const followUpCards = $derived(report?.graph.evidence.filter((piece) => piece.coverage === 'follow-up') ?? []);
+	const sources = $derived(Array.from(new Map((report?.graph.evidence.flatMap((piece) => piece.sources) ?? []).map((source) => [source.url, source])).values()));
+
+	function reportMarkdown() {
+		if (!report) return '';
+		const checked = firstPass.map((piece) => `- **${piece.facet}:** ${piece.claim}`).join('\n');
+		const followUps = followUpCards.length ? followUpCards.map((piece) => `- **${piece.facet}:** ${piece.claim}`).join('\n') : '- None.';
+		const sourceList = sources.map((source, index) => `${index + 1}. [${source.title}](${source.url})`).join('\n');
+		return `# Argus report\n\n## Question\n${report.question}\n\n## Answer\n${report.answer}\n\n## What Argus checked\n${checked}\n\n## Follow-ups\n${followUps}\n\n## Sources\n${sourceList}\n`;
+	}
+
+	async function copyAnswer() {
+		if (!report) return;
+		await navigator.clipboard.writeText(report.answer);
+		notice = 'Answer copied.';
+	}
+
+	function downloadReport() {
+		if (!report) return;
+		const blob = new Blob([reportMarkdown()], { type: 'text/markdown;charset=utf-8' });
+		const url = URL.createObjectURL(blob);
+		const link = document.createElement('a');
+		link.href = url;
+		link.download = 'argus-report.md';
+		link.click();
+		URL.revokeObjectURL(url);
+		notice = 'Report downloaded.';
+	}
 </script>
 
 <SEO />
@@ -74,6 +105,22 @@
 
 	<section class="thesis"><p><strong>The idea.</strong> Research should show its work.</p></section>
 
+	<section id="mechanism" class="diagram" aria-label="How Argus works">
+		<div class="diagram-copy">
+			<p class="eyebrow">How it works</p>
+			<h2>The gaps decide the next search.</h2>
+		</div>
+		<div class="loop">
+			<div class="loop-node"><span>01</span><strong>Question</strong><p>Start with one ask.</p></div>
+			<div class="loop-arrow">→</div>
+			<div class="loop-node"><span>02</span><strong>Search</strong><p>Collect source cards.</p></div>
+			<div class="loop-arrow loop-turn">↺</div>
+			<div class="loop-node loop-gap"><span>03</span><strong>Gap?</strong><p>Thin evidence gets a follow-up search.</p></div>
+			<div class="loop-arrow">→</div>
+			<div class="loop-node"><span>04</span><strong>Report</strong><p>Answer with receipts.</p></div>
+		</div>
+	</section>
+
 	<section id="demo" class="demo-shell">
 		<div class="composer">
 			<p class="eyebrow">Try it</p>
@@ -89,28 +136,41 @@
 			{#if notice}<p class="notice">{notice}</p>{/if}
 		</div>
 
-		<div class="result">
-			<p class="eyebrow">Evidence board</p>
-			{#if snapshot?.output}
-				<h2>{snapshot.output.answer}</h2>
-				<div class="metrics">
-					<span>{snapshot.output.graph.coverage.totalFacets} facets</span>
-					<span>{snapshot.output.graph.evidence.length} evidence cards</span>
-					<span>{snapshot.output.followUps.length} dynamic follow-ups</span>
-				</div>
-				<div class="trace">
-					{#each snapshot.output.trace as item}<span>{item}</span>{/each}
-				</div>
-				<div class="cards">
-					{#each snapshot.output.graph.evidence as piece}
-						<article class={`card ${piece.coverage}`}>
-							<header><strong>{piece.facet}</strong><span>{piece.coverage} · {Math.round(piece.confidence * 100)}%</span></header>
-							<h3>{piece.claim}</h3>
-							<p>{piece.summary}</p>
-							<ul>{#each piece.sources.slice(0, 2) as source}<li><a href={source.url}>{source.title}</a></li>{/each}</ul>
-						</article>
-					{/each}
-				</div>
+		<div class="result report">
+			<p class="eyebrow">Evidence report</p>
+			{#if report}
+				<header class="report-head">
+					<div>
+						<h2>{report.answer}</h2>
+						<p>{report.graph.evidence.length} source cards · {report.followUps.length} follow-up searches</p>
+					</div>
+					<div class="report-actions">
+						<button type="button" onclick={copyAnswer}>Copy answer</button>
+						<button type="button" onclick={downloadReport}>Download .md</button>
+					</div>
+				</header>
+				<section class="report-section">
+					<h3>What Argus checked</h3>
+					<div class="cards">
+						{#each firstPass as piece}
+							<article class="card">
+								<header><strong>{piece.facet}</strong></header>
+								<p>{piece.claim}</p>
+							</article>
+						{/each}
+					</div>
+				</section>
+				<section class="report-section">
+					<h3>Follow-ups</h3>
+					{#if followUpCards.length}
+						<div class="cards compact">{#each followUpCards as piece}<article class="card follow-up"><header><strong>{piece.facet}</strong></header><p>{piece.claim}</p></article>{/each}</div>
+					{:else}<p>No follow-up search was needed.</p>{/if}
+				</section>
+				<section class="report-section sources">
+					<h3>Sources</h3>
+					<ol>{#each sources as source}<li><a href={source.url}>{source.title}</a></li>{/each}</ol>
+				</section>
+				<details class="run-details"><summary>Run trace</summary><div class="trace">{#each report.trace as item}<span>{item}</span>{/each}</div></details>
 			{:else}
 				<div class="empty-board">
 					<strong>The empty state is honest.</strong>
@@ -120,10 +180,4 @@
 		</div>
 	</section>
 
-	<section id="mechanism" class="mechanism">
-		<article><p class="eyebrow">01</p><h2>Split</h2><p>Break the question into a few useful angles.</p></article>
-		<article><p class="eyebrow">02</p><h2>Search</h2><p>Find live papers and keep the links.</p></article>
-		<article><p class="eyebrow">03</p><h2>Follow up</h2><p>If the evidence is thin, search again on purpose.</p></article>
-		<article><p class="eyebrow">04</p><h2>Answer</h2><p>Write from the source cards, not from a blob of chat.</p></article>
-	</section>
 </main>
