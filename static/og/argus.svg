@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f3efef"/>
+  <path d="M54 74H1146" stroke="#101010" stroke-width="4"/>
+  <path d="M54 536H1146" stroke="#101010" stroke-width="4"/>
+  <text x="54" y="52" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="4" fill="#101010">ARGUS</text>
+  <rect x="932" y="28" width="214" height="46" rx="23" fill="#101010"/>
+  <text x="969" y="59" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="20" fill="#f3efef">evidence agent</text>
+  <text x="54" y="212" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="84" font-weight="500" letter-spacing="-5" fill="#101010">Research with</text>
+  <text x="54" y="306" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="84" font-weight="500" letter-spacing="-5" fill="#101010">receipts.</text>
+  <text x="58" y="378" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="29" fill="#393534">Ask. Search. Follow the gaps. Show the sources.</text>
+  <g transform="translate(704 172)">
+    <path d="M0 0H402" stroke="#101010" stroke-width="3"/>
+    <path d="M0 74H402" stroke="#101010" stroke-width="2"/>
+    <path d="M0 148H402" stroke="#101010" stroke-width="2" stroke-dasharray="11 9"/>
+    <path d="M0 222H402" stroke="#101010" stroke-width="2"/>
+    <text x="0" y="48" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="600" fill="#101010">split</text>
+    <text x="180" y="48" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="24" fill="#101010">3 angles</text>
+    <text x="0" y="122" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="600" fill="#101010">search</text>
+    <text x="180" y="122" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="24" fill="#101010">live papers</text>
+    <text x="0" y="196" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="600" fill="#101010">follow up</text>
+    <text x="180" y="196" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="24" fill="#101010">thin evidence</text>
+  </g>
+  <text x="54" y="584" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="24" font-weight="600" fill="#101010">argus.coey.dev</text>
+  <text x="760" y="584" font-family="Avenir Next, Helvetica Neue, Arial, sans-serif" font-size="24" fill="#101010">Cloudflare Workflows + Workers AI</text>
+</svg>

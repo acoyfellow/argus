@@ -1,4 +1,5 @@
 <script lang="ts">
+	import SEO from '$lib/SEO.svelte';
 	import type { WorkflowSnapshot } from '$lib/argus/types';
 
 	const questionExamples = [
@@ -49,10 +50,7 @@
 	}
 </script>
 
-<svelte:head>
-	<title>Argus — an evidence assembly harness</title>
-	<meta name="description" content="Argus researches a question, follows the gaps, and shows its sources." />
-</svelte:head>
+<SEO />
 
 <main>
 	<nav class="nav" aria-label="Primary">
