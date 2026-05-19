@@ -102,9 +102,9 @@
 	<section class="hero">
 		<p class="eyebrow">Cloudflare Workflows + Workers AI + live sources</p>
 		<h1>Research with receipts.</h1>
-		<p class="lede">Ask a question. Argus searches, notices what is missing, follows up, and shows the sources behind its answer.</p>
+		<p class="lede">Ask a question. Argus gathers evidence, checks what is missing, and returns a clear report with sources.</p>
 		<div class="actions">
-			<a class="primary" href="#demo">Run Argus</a>
+			<a class="primary" href="#demo">Start research</a>
 			<a class="secondary" href="https://github.com/acoyfellow/argus">GitHub</a>
 		</div>
 	</section>
@@ -124,7 +124,7 @@
 	<section id="demo" class="demo-shell">
 		<div class="composer">
 			<p class="eyebrow">Try it</p>
-			<h2>Ask a question.</h2>
+			<h2>Ask Argus a research question.</h2>
 			<p class="model-note">Workers AI: {data.model}</p>
 			<label for="question">Research question</label>
 			<textarea id="question" bind:value={question} rows="4"></textarea>
@@ -133,7 +133,7 @@
 					<button type="button" onclick={() => (question = example)}>{example}</button>
 				{/each}
 			</div>
-			<button class="run" type="button" onclick={runArgus} disabled={busy}>{busy ? 'Researching…' : 'Run Argus'}</button>
+			<button class="run" type="button" onclick={runArgus} disabled={busy}>{busy ? 'Researching…' : 'Start research'}</button>
 			{#if notice}<p class="notice">{notice}</p>{/if}
 		</div>
 
@@ -145,11 +145,11 @@
 					<p>{report.question}</p>
 				</section>
 				<section class="report-section">
-					<h3>Angles</h3>
+					<h3>What Argus looked into</h3>
 					<div class="angle-list">{#each report.graph.facets as facet}<span>{facet.label}</span>{/each}</div>
 				</section>
 				<section class="report-section">
-					<h3>Evidence board</h3>
+					<h3>What the evidence supported</h3>
 					<div class="cards">
 						{#each firstPass as piece}
 							<article class="card">
@@ -160,7 +160,7 @@
 					</div>
 				</section>
 				<section class="report-section">
-					<h3>Gap → follow-up</h3>
+					<h3>What Argus checked again</h3>
 					{#if report.graph.gaps.length}<p class="gap-note">{report.graph.gaps[0].reason}</p>{/if}
 					{#if followUpCards.length}
 						<div class="cards compact">{#each followUpCards as piece}<article class="card follow-up"><header><strong>{piece.facet}</strong></header><p>{piece.claim}</p></article>{/each}</div>
@@ -173,7 +173,7 @@
 						<p>{report.graph.evidence.length} source cards · {report.followUps.length} follow-up searches</p>
 					</div>
 					<div class="report-actions">
-						<button type="button" onclick={copyAnswer}>Copy answer</button>
+						<button type="button" onclick={copyAnswer}>Copy final answer</button>
 						<button type="button" onclick={downloadReport}>Download .md</button>
 					</div>
 				</header>
