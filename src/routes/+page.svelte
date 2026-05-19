@@ -129,7 +129,7 @@
 		<div class="composer">
 			<p class="eyebrow">Try it</p>
 			<h2>Ask a question.</h2>
-			<p class="model-note">Workers AI: {data.models[0]}{#if data.models[1]} · fallback: {data.models[1]}{/if}</p>
+			<p class="model-note">Workers AI: {data.model}</p>
 			<label for="question">Research question</label>
 			<textarea id="question" bind:value={question} rows="4"></textarea>
 			<div class="chips">

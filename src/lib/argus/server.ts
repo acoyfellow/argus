@@ -12,14 +12,12 @@ import type {
 interface AiEnv {
 	AI: Ai;
 	ARGUS_MODEL?: string;
-	ARGUS_FALLBACK_MODEL?: string;
 }
 
 export const DEFAULT_MODEL = '@cf/moonshotai/kimi-k2.6';
-export const DEFAULT_FALLBACK_MODEL = '@cf/meta/llama-4-scout-17b-16e-instruct';
 
-export function configuredModels(env: Pick<AiEnv, 'ARGUS_MODEL' | 'ARGUS_FALLBACK_MODEL'>): string[] {
-	return [...new Set([env.ARGUS_MODEL || DEFAULT_MODEL, env.ARGUS_FALLBACK_MODEL || DEFAULT_FALLBACK_MODEL].filter(Boolean))];
+export function configuredModel(env: Pick<AiEnv, 'ARGUS_MODEL'>): string {
+	return env.ARGUS_MODEL || DEFAULT_MODEL;
 }
 const ARXIV_API = 'https://export.arxiv.org/api/query';
 
@@ -215,20 +213,12 @@ async function runJson<T>(env: AiEnv, prompt: string): Promise<T | null> {
 }
 
 async function runText(env: AiEnv, prompt: string): Promise<string> {
-	let lastError: unknown;
-	for (const model of configuredModels(env)) {
-		try {
-			const raw = await env.AI.run(model, {
-				messages: [{ role: 'user', content: prompt }],
-				max_tokens: 700
-			}) as { response?: unknown } | string;
-			if (typeof raw === 'string') return raw.trim();
-			return typeof raw.response === 'string' ? raw.response.trim() : JSON.stringify(raw.response ?? '').trim();
-		} catch (error) {
-			lastError = error;
-		}
-	}
-	throw lastError instanceof Error ? lastError : new Error('Workers AI inference failed for every configured model.');
+	const raw = await env.AI.run(configuredModel(env), {
+		messages: [{ role: 'user', content: prompt }],
+		max_tokens: 700
+	}) as { response?: unknown } | string;
+	if (typeof raw === 'string') return raw.trim();
+	return typeof raw.response === 'string' ? raw.response.trim() : JSON.stringify(raw.response ?? '').trim();
 }
 
 function clean(value: unknown): string {
