@@ -88,7 +88,19 @@ textarea { width: 100%; resize: vertical; min-height: 116px; padding: 13px; bord
 .card { padding: 13px 0; border-bottom: 1.5px solid #101010; }
 .card header { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; }
 .card p { margin-bottom: 0; }
-.sources ol { margin: 0 0 14px; padding-left: 22px; }
+.sources ol { display: grid; gap: 8px; margin: 0 0 14px; padding-left: 22px; }
+.sources a {
+	display: inline-block;
+	padding: 3px 9px 4px;
+	border: 2px solid #101010;
+	border-radius: 999px;
+	background: #101010;
+	color: #f3efef;
+	font-weight: 600;
+	text-decoration: none;
+}
+.sources a::after { content: ' ↗'; }
+.sources a:hover { background: transparent; color: #101010; }
 li a { text-decoration-thickness: 1px; text-underline-offset: 2px; }
 .run-details { padding: 16px 0 0; }
 .run-details summary { cursor: pointer; font-weight: 700; }
