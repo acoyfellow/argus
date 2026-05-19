@@ -13,6 +13,9 @@
 
 	let question = $state(questionExamples[0]);
 	let snapshot = $state<WorkflowSnapshot | null>(null);
+	$effect(() => {
+		if (!snapshot) snapshot = { id: 'example-report', status: 'complete', output: data.example };
+	});
 	let busy = $state(false);
 	let notice = $state('');
 
@@ -135,7 +138,7 @@
 		</div>
 
 		<div class="result report">
-			<p class="eyebrow">Evidence report</p>
+			<p class="eyebrow">{snapshot?.id === 'example-report' ? 'Example report' : 'Evidence report'}</p>
 			{#if report}
 				<header class="report-head">
 					<div>

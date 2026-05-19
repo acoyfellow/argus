@@ -1,0 +1,125 @@
+{
+  "question": "What makes evidence-building research agents more useful than one-shot answers?",
+  "answer": "Evidence-building agents are useful because they keep the research process visible: they split the question, gather source-backed claims, follow weak spots, and return a report that can be checked instead of a single unsupported answer.",
+  "graph": {
+    "question": "What makes evidence-building research agents more useful than one-shot answers?",
+    "facets": [
+      {
+        "id": "f1",
+        "label": "Research shape",
+        "query": "research shape",
+        "why": "Example angle."
+      },
+      {
+        "id": "f2",
+        "label": "Gap handling",
+        "query": "gap handling",
+        "why": "Example angle."
+      },
+      {
+        "id": "f3",
+        "label": "Report quality",
+        "query": "report quality",
+        "why": "Example angle."
+      }
+    ],
+    "evidence": [
+      {
+        "facetId": "f1",
+        "facet": "Research shape",
+        "claim": "Argus treats research as evidence assembly, not as a single prompt-to-answer jump.",
+        "summary": "The workflow first breaks the ask into angles, then gathers bounded source cards for each angle.",
+        "confidence": 0.9,
+        "coverage": "supported",
+        "sources": [
+          {
+            "title": "Argus: Evidence Assembly for Scalable Deep Research Agents",
+            "url": "https://arxiv.org/abs/2605.16217",
+            "excerpt": "Deep research answers are composed of complementary pieces of evidence."
+          }
+        ]
+      },
+      {
+        "facetId": "f2",
+        "facet": "Gap handling",
+        "claim": "Thin or missing evidence can trigger targeted follow-up searches before the report is written.",
+        "summary": "The evidence board exposes weak spots, so the next search is aimed at the gap instead of rerunning the whole task.",
+        "confidence": 0.9,
+        "coverage": "follow-up",
+        "sources": [
+          {
+            "title": "Argus: Evidence Assembly for Scalable Deep Research Agents",
+            "url": "https://arxiv.org/abs/2605.16217",
+            "excerpt": "The Navigator inspects the graph for gaps and dispatches new searches."
+          }
+        ]
+      },
+      {
+        "facetId": "f3",
+        "facet": "Report quality",
+        "claim": "The useful output is a sourced report: answer, evidence cards, follow-ups, and links.",
+        "summary": "That gives readers a compact artifact they can copy, download, and audit.",
+        "confidence": 0.9,
+        "coverage": "supported",
+        "sources": [
+          {
+            "title": "paper.json: A Coordination Convention for LLM-Agent-Actionable Papers",
+            "url": "https://arxiv.org/abs/2605.16194",
+            "excerpt": "Agents benefit from stable, inspectable claims and explicit scope."
+          },
+          {
+            "title": "Argus: Evidence Assembly for Scalable Deep Research Agents",
+            "url": "https://arxiv.org/abs/2605.16217",
+            "excerpt": "The final answer traces back to evidence nodes."
+          }
+        ]
+      }
+    ],
+    "gaps": [
+      {
+        "facetId": "f2",
+        "facet": "Gap handling",
+        "reason": "The first pass was thin, so Argus ran one follow-up search.",
+        "query": "targeted follow-up search for evidence graph gaps"
+      }
+    ],
+    "coverage": {
+      "supported": 2,
+      "followUps": 1,
+      "totalFacets": 3
+    }
+  },
+  "followUps": [
+    {
+      "facet": {
+        "id": "f2-follow-up",
+        "label": "Gap handling follow-up",
+        "query": "targeted follow-up search for evidence graph gaps",
+        "why": "The first pass was thin."
+      },
+      "evidence": {
+        "facetId": "f2",
+        "facet": "Gap handling",
+        "claim": "Thin or missing evidence can trigger targeted follow-up searches before the report is written.",
+        "summary": "The evidence board exposes weak spots, so the next search is aimed at the gap instead of rerunning the whole task.",
+        "confidence": 0.9,
+        "coverage": "follow-up",
+        "sources": [
+          {
+            "title": "Argus: Evidence Assembly for Scalable Deep Research Agents",
+            "url": "https://arxiv.org/abs/2605.16217",
+            "excerpt": "The Navigator inspects the graph for gaps and dispatches new searches."
+          }
+        ]
+      }
+    }
+  ],
+  "trace": [
+    "accepted question",
+    "split into 3 angles",
+    "assembled source cards",
+    "dispatched 1 gap-triggered follow-up",
+    "wrote sourced report"
+  ],
+  "completedAt": "2026-05-19T00:00:00.000Z"
+}
