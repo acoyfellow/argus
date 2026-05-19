@@ -66,7 +66,7 @@
 
 	<section class="hero">
 		<p class="eyebrow">argus.coey.dev · Cloudflare Workflows + Workers AI + live sources</p>
-		<h1>An agent that researches by assembling evidence, then growing the workflow around its gaps.</h1>
+		<h1>Research as an evidence board, not a transcript pile.</h1>
 		<p class="lede">Argus runs for real: one durable workflow facets a question, searches current arXiv receipts, scores evidence with Workers AI, dispatches follow-up searches when the graph exposes a gap, then synthesizes the compact board.</p>
 		<div class="actions">
 			<a class="primary" href="#demo">Run Argus</a>
