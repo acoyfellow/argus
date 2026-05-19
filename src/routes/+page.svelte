@@ -91,14 +91,13 @@
 		<a class="wordmark" href="/">ARGUS</a>
 		<div class="nav-links">
 			<a href="#demo">Live demo</a>
-			<a href="#mechanism">Mechanism</a>
 			<a href="/docs">Docs</a>
 			<a href="https://arxiv.org/abs/2605.16217">Paper</a>
 		</div>
 	</nav>
 
 	<section class="hero">
-		<p class="eyebrow">argus.coey.dev · Cloudflare Workflows + Workers AI + live sources</p>
+		<p class="eyebrow">Cloudflare Workflows + Workers AI + live sources</p>
 		<h1>Research with receipts.</h1>
 		<p class="lede">Ask a question. Argus searches, notices what is missing, follows up, and shows the sources behind its answer.</p>
 		<div class="actions">

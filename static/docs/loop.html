@@ -1,0 +1,11 @@
+<pre class="shiki github-dark" style="background-color:#24292e;color:#e1e4e8" tabindex="0"><code><span class="line"><span style="color:#6A737D">// Weak evidence creates the next search.</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> board</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> buildEvidenceBoard</span><span style="color:#E1E4E8">(question);</span></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> gaps</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> board.facets.</span><span style="color:#B392F0">filter</span><span style="color:#E1E4E8">((</span><span style="color:#FFAB70">facet</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">=></span><span style="color:#E1E4E8"> facet.coverage </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> 'thin'</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">for</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">const</span><span style="color:#79B8FF"> gap</span><span style="color:#F97583"> of</span><span style="color:#E1E4E8"> gaps) {</span></span>
+<span class="line"><span style="color:#F97583">  const</span><span style="color:#79B8FF"> evidence</span><span style="color:#F97583"> =</span><span style="color:#F97583"> await</span><span style="color:#B392F0"> search</span><span style="color:#E1E4E8">(gap.followUpQuery);</span></span>
+<span class="line"><span style="color:#E1E4E8">  board.</span><span style="color:#B392F0">attach</span><span style="color:#E1E4E8">(gap.id, evidence);</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">return</span><span style="color:#B392F0"> synthesize</span><span style="color:#E1E4E8">(board);</span></span>
+<span class="line"></span></code></pre>

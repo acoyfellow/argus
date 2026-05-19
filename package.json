@@ -6,13 +6,14 @@
 	"scripts": {
 		"dev": "bun run build && bunx wrangler dev --port 4173",
 		"dev:ui": "vite dev",
-		"build": "bun run og && vite build && node scripts/attach-workflow.mjs && wrangler types && wrangler deploy --dry-run --outdir dist/worker",
+		"build": "bun run og && bun run docs:code && vite build && node scripts/attach-workflow.mjs && wrangler types && wrangler deploy --dry-run --outdir dist/worker",
 		"preview": "bun run build && bunx wrangler dev --port 4173",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "rm -rf .svelte-kit/output .svelte-kit/cloudflare .svelte-kit/cloudflare-tmp && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"gen": "wrangler types",
-		"og": "node scripts/generate-og.mjs"
+		"og": "node scripts/generate-og.mjs",
+		"docs:code": "node scripts/highlight-docs.mjs"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-cloudflare": "^7.2.8",
@@ -22,6 +23,7 @@
 		"@tailwindcss/vite": "^4.3.0",
 		"@types/node": "^25.9.0",
 		"sharp-cli": "^5.2.0",
+		"shiki": "^4.1.0",
 		"svelte": "^5.55.8",
 		"svelte-check": "^4.4.8",
 		"tailwindcss": "^4.3.0",

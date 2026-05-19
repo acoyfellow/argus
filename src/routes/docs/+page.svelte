@@ -4,45 +4,6 @@
 	const title = 'Argus — docs';
 	const description = 'How Argus runs: deploy it, run it locally, and read the gap-triggered follow-up loop.';
 	const canonical = 'https://argus.coey.dev/docs';
-
-	const localSnippet = `# Clone, install, and run locally.
-git clone https://github.com/acoyfellow/argus
-cd argus
-bun install
-
-# Full local run through Wrangler. Real Workflows + Workers AI.
-bun run dev   # then open http://localhost:4173
-`;
-
-	const deploySnippet = `# Type-check, build, and deploy a single Worker.
-bun run check
-bun run build
-wrangler deploy
-`;
-
-	const loopSnippet = `// src/workflow-runtime.ts — the gap-triggered follow-up loop.
-// 1. Split the question into facets.
-const facets = await generateFacets(question);
-
-// 2. First-pass searches return bounded evidence traces.
-const evidence = await Promise.all(
-  facets.map((facet) => searchArxiv(facet))
-);
-
-// 3. The evidence board scores coverage and surfaces GAPS.
-const board = buildEvidenceBoard(facets, evidence);
-const gaps = board.facets.filter((facet) => facet.coverage === 'thin');
-
-// 4. Gaps DECIDE the next step. Follow-up searches are dispatched
-//    only for the facets that need more support.
-for (const gap of gaps) {
-  const followUp = await searchArxiv(gap.followUpQuery);
-  board.attach(gap.id, followUp, { coverage: 'follow-up' });
-}
-
-// 5. Synthesis reads the evidence board, not the raw transcripts.
-return synthesize(board);
-`;
 </script>
 
 <svelte:head>
@@ -84,7 +45,7 @@ return synthesize(board);
 			<h2>Run it on your machine.</h2>
 			<p>This builds the Worker and runs it locally. Workers AI still calls the real binding in your Cloudflare account.</p>
 		</div>
-		<pre class="code"><code>{localSnippet}</code></pre>
+		<iframe class="code-frame" title="Local commands" src="/docs/local.html"></iframe>
 	</section>
 
 	<section class="docs-section">
@@ -93,7 +54,7 @@ return synthesize(board);
 			<h2>Ship it to your account.</h2>
 			<p>Deploy the site, API, and Workflow together. Use the button in the README, or run these commands.</p>
 		</div>
-		<pre class="code"><code>{deploySnippet}</code></pre>
+		<iframe class="code-frame small" title="Deploy commands" src="/docs/deploy.html"></iframe>
 	</section>
 
 	<section id="loop" class="docs-section">
@@ -102,7 +63,7 @@ return synthesize(board);
 			<h2>Gaps decide the next search.</h2>
 			<p>This is the paper idea in code. Weak evidence creates the next search. The answer reads the board, not a pile of chat.</p>
 		</div>
-		<pre class="code"><code>{loopSnippet}</code></pre>
+		<iframe class="code-frame tall" title="Gap-triggered workflow snippet" src="/docs/loop.html"></iframe>
 	</section>
 
 	<section class="diagram" aria-label="The Argus loop">
@@ -146,21 +107,16 @@ return synthesize(board);
 	.docs-section.last { border-bottom: 3px solid #101010; }
 	.docs-copy h2 { max-width: 360px; margin: 0 0 12px; }
 	.docs-copy p { margin: 0; color: rgba(16,16,16,.8); line-height: 1.5; }
-	.code code {
-		font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-	}
-	.code {
+	.code-frame {
+		width: 100%;
+		height: 238px;
 		margin: 0;
-		padding: 18px;
 		border: 2px solid #101010;
 		border-radius: 18px;
-		background: #101010;
-		color: #f3efef;
-		overflow-x: auto;
-		font-size: .86rem;
-		line-height: 1.55;
+		background: #24292e;
 	}
-	.code code { white-space: pre; }
+	.code-frame.small { height: 138px; }
+	.code-frame.tall { height: 304px; }
 	.docs-aside { display: grid; align-content: start; }
 	.docs-aside .primary.big {
 		display: inline-block;
