@@ -82,14 +82,18 @@ textarea { width: 100%; resize: vertical; min-height: 116px; padding: 13px; bord
 .notice { margin: 14px 0 0; padding: 10px 0; border-top: 1px solid #101010; }
 .trace span { padding: 6px 10px; font-size: .8rem; }
 .trace { margin: 12px 0 0; }
-.report-head { display: grid; grid-template-columns: 1fr auto; gap: 18px; padding-bottom: 18px; border-bottom: 3px solid #101010; }
+.report-head { display: grid; grid-template-columns: 1fr auto; gap: 18px; padding: 18px 0; border-bottom: 3px solid #101010; }
 .report-head h2 { font-size: clamp(1.05rem, 1.45vw, 1.45rem); line-height: 1.18; letter-spacing: -.02em; }
 .report-head p { margin: 0; }
 .report-actions { display: grid; align-content: start; gap: 8px; }
 .report-actions button { cursor: pointer; padding: 8px 12px; background: transparent; color: #101010; font: inherit; font-weight: 600; }
 .report-actions button:first-child { background: #101010; color: #f3efef; }
 .report-section { padding: 18px 0 4px; border-bottom: 1.5px solid #101010; }
-.report-section h3 { text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; }
+.report-section h3, .report-head h3 { text-transform: uppercase; letter-spacing: .08em; font-size: .78rem; }
+.asked p { margin-bottom: 12px; font-size: 1.08rem; font-weight: 600; color: #101010; }
+.angle-list { display: flex; flex-wrap: wrap; gap: 8px; padding-bottom: 14px; }
+.angle-list span { padding: 6px 10px; border: 2px solid #101010; border-radius: 999px; font-size: .82rem; font-weight: 600; }
+.gap-note { padding-left: 12px; border-left: 2px dashed #101010; }
 .cards { display: grid; gap: 0; border-top: 1.5px solid #101010; }
 .card { padding: 13px 0; border-bottom: 1.5px solid #101010; }
 .card header { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 8px; font-size: .76rem; text-transform: uppercase; letter-spacing: .08em; }

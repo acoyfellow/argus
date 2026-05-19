@@ -1,90 +1,100 @@
 {
-  "question": "What makes evidence-building research agents more useful than one-shot answers?",
-  "answer": "Evidence-building agents are useful because they keep the research process visible: they split the question, gather source-backed claims, follow weak spots, and return a report that can be checked instead of a single unsupported answer.",
+  "question": "Do passkeys meaningfully reduce phishing and account takeover risk?",
+  "answer": "Yes \u2014 for phishing-led account takeover, passkeys are a meaningful upgrade. They replace reusable passwords with origin-bound cryptographic sign-in, so a fake login page cannot simply steal a secret and replay it elsewhere. Public guidance from FIDO, CISA, NIST, Google, and Microsoft points in the same direction: passkeys and WebAuthn-style credentials are materially more phishing-resistant than passwords and weaker MFA.\n\nThey are not a full account-security strategy by themselves. Recovery flows, device loss, enrollment, and fallback methods still matter. The reduction is strongest when teams avoid falling back to phishable recovery paths.",
   "graph": {
-    "question": "What makes evidence-building research agents more useful than one-shot answers?",
+    "question": "Do passkeys meaningfully reduce phishing and account takeover risk?",
     "facets": [
       {
         "id": "f1",
-        "label": "Research shape",
-        "query": "research shape",
-        "why": "Example angle."
+        "label": "Phishing resistance",
+        "query": "Do passkeys block credential replay on fake login pages?",
+        "why": "Check the direct phishing mechanism."
       },
       {
         "id": "f2",
-        "label": "Gap handling",
-        "query": "gap handling",
-        "why": "Example angle."
+        "label": "Security guidance",
+        "query": "Do security authorities recommend them?",
+        "why": "Check standards and public guidance."
       },
       {
         "id": "f3",
-        "label": "Report quality",
-        "query": "report quality",
-        "why": "Example angle."
+        "label": "Residual risk",
+        "query": "What still weakens account takeover protection?",
+        "why": "Check recovery, fallback, and deployment limits."
       }
     ],
     "evidence": [
       {
         "facetId": "f1",
-        "facet": "Research shape",
-        "claim": "Argus treats research as evidence assembly, not as a single prompt-to-answer jump.",
-        "summary": "The workflow first breaks the ask into angles, then gathers bounded source cards for each angle.",
+        "facet": "Phishing resistance",
+        "claim": "Passkeys remove the reusable secret that phishing pages usually capture.",
+        "summary": "FIDO and Google both frame passkeys as cryptographic, phishing-resistant sign-in rather than typed credentials.",
         "confidence": 0.9,
         "coverage": "supported",
         "sources": [
           {
-            "title": "Argus: Evidence Assembly for Scalable Deep Research Agents",
-            "url": "https://arxiv.org/abs/2605.16217",
-            "excerpt": "Deep research answers are composed of complementary pieces of evidence."
+            "title": "FIDO Alliance \u2014 Passkeys",
+            "url": "https://fidoalliance.org/passkeys/",
+            "excerpt": "Passkeys replace passwords with phishing-resistant cryptographic credentials."
+          },
+          {
+            "title": "Google Security Blog \u2014 Passkeys are simpler and safer",
+            "url": "https://security.googleblog.com/2023/05/so-long-passwords-thanks-for-all-phish.html",
+            "excerpt": "Google describes passkeys as a safer sign-in option resistant to phishing."
           }
         ]
       },
       {
         "facetId": "f2",
-        "facet": "Gap handling",
-        "claim": "Thin or missing evidence can trigger targeted follow-up searches before the report is written.",
-        "summary": "The evidence board exposes weak spots, so the next search is aimed at the gap instead of rerunning the whole task.",
+        "facet": "Security guidance",
+        "claim": "Public security guidance treats FIDO/WebAuthn-style authentication as stronger than phishable MFA.",
+        "summary": "CISA explicitly recommends phishing-resistant MFA; NIST guidance makes that distinction part of assurance thinking.",
         "confidence": 0.9,
-        "coverage": "follow-up",
+        "coverage": "supported",
         "sources": [
           {
-            "title": "Argus: Evidence Assembly for Scalable Deep Research Agents",
-            "url": "https://arxiv.org/abs/2605.16217",
-            "excerpt": "The Navigator inspects the graph for gaps and dispatches new searches."
+            "title": "CISA \u2014 Implementing Phishing-Resistant MFA",
+            "url": "https://www.cisa.gov/resources-tools/resources/implementing-phishing-resistant-mfa",
+            "excerpt": "CISA recommends phishing-resistant MFA and names FIDO/WebAuthn as the gold standard."
+          },
+          {
+            "title": "NIST SP 800-63B Digital Identity Guidelines",
+            "url": "https://pages.nist.gov/800-63-4/sp800-63b.html",
+            "excerpt": "NIST authentication guidance distinguishes phishing-resistant authentication from weaker factors."
           }
         ]
       },
       {
         "facetId": "f3",
-        "facet": "Report quality",
-        "claim": "The useful output is a sourced report: answer, evidence cards, follow-ups, and links.",
-        "summary": "That gives readers a compact artifact they can copy, download, and audit.",
+        "facet": "Residual risk",
+        "claim": "Passkeys reduce phishing risk, but recovery and fallback paths can reintroduce account takeover risk.",
+        "summary": "The first pass answered phishing resistance well, but not operational edge cases. Argus followed up on device, recovery, and account-flow framing.",
         "confidence": 0.9,
-        "coverage": "supported",
+        "coverage": "follow-up",
         "sources": [
           {
-            "title": "paper.json: A Coordination Convention for LLM-Agent-Actionable Papers",
-            "url": "https://arxiv.org/abs/2605.16194",
-            "excerpt": "Agents benefit from stable, inspectable claims and explicit scope."
+            "title": "Microsoft \u2014 How passkeys work",
+            "url": "https://support.microsoft.com/en-us/account-billing/learn-more-about-passkeys-9a398ed5-3e3a-4c8b-8e10-14a1a20d45ac",
+            "excerpt": "Microsoft explains that passkeys use device-held cryptographic credentials rather than reusable passwords."
           },
           {
-            "title": "Argus: Evidence Assembly for Scalable Deep Research Agents",
-            "url": "https://arxiv.org/abs/2605.16217",
-            "excerpt": "The final answer traces back to evidence nodes."
+            "title": "NIST SP 800-63B Digital Identity Guidelines",
+            "url": "https://pages.nist.gov/800-63-4/sp800-63b.html",
+            "excerpt": "NIST authentication guidance distinguishes phishing-resistant authentication from weaker factors."
           }
         ]
       }
     ],
     "gaps": [
       {
-        "facetId": "f2",
-        "facet": "Gap handling",
-        "reason": "The first pass was thin, so Argus ran one follow-up search.",
-        "query": "targeted follow-up search for evidence graph gaps"
+        "facetId": "f3",
+        "facet": "Residual risk",
+        "reason": "The first pass proved phishing resistance but left recovery and fallback risk underspecified.",
+        "query": "passkeys recovery fallback account takeover guidance"
       }
     ],
     "coverage": {
-      "supported": 2,
+      "supported": 3,
       "followUps": 1,
       "totalFacets": 3
     }
@@ -92,23 +102,28 @@
   "followUps": [
     {
       "facet": {
-        "id": "f2-follow-up",
-        "label": "Gap handling follow-up",
-        "query": "targeted follow-up search for evidence graph gaps",
-        "why": "The first pass was thin."
+        "id": "f3-follow-up",
+        "label": "Residual risk follow-up",
+        "query": "passkeys recovery fallback account takeover guidance",
+        "why": "Recovery and fallback were thin in the first pass."
       },
       "evidence": {
-        "facetId": "f2",
-        "facet": "Gap handling",
-        "claim": "Thin or missing evidence can trigger targeted follow-up searches before the report is written.",
-        "summary": "The evidence board exposes weak spots, so the next search is aimed at the gap instead of rerunning the whole task.",
+        "facetId": "f3",
+        "facet": "Residual risk",
+        "claim": "Passkeys reduce phishing risk, but recovery and fallback paths can reintroduce account takeover risk.",
+        "summary": "The first pass answered phishing resistance well, but not operational edge cases. Argus followed up on device, recovery, and account-flow framing.",
         "confidence": 0.9,
         "coverage": "follow-up",
         "sources": [
           {
-            "title": "Argus: Evidence Assembly for Scalable Deep Research Agents",
-            "url": "https://arxiv.org/abs/2605.16217",
-            "excerpt": "The Navigator inspects the graph for gaps and dispatches new searches."
+            "title": "Microsoft \u2014 How passkeys work",
+            "url": "https://support.microsoft.com/en-us/account-billing/learn-more-about-passkeys-9a398ed5-3e3a-4c8b-8e10-14a1a20d45ac",
+            "excerpt": "Microsoft explains that passkeys use device-held cryptographic credentials rather than reusable passwords."
+          },
+          {
+            "title": "NIST SP 800-63B Digital Identity Guidelines",
+            "url": "https://pages.nist.gov/800-63-4/sp800-63b.html",
+            "excerpt": "NIST authentication guidance distinguishes phishing-resistant authentication from weaker factors."
           }
         ]
       }
@@ -116,9 +131,10 @@
   ],
   "trace": [
     "accepted question",
-    "split into 3 angles",
-    "assembled source cards",
-    "dispatched 1 gap-triggered follow-up",
+    "split into 3 research angles",
+    "assembled first evidence board",
+    "found one gap: recovery and fallback risk",
+    "ran a targeted follow-up search",
     "wrote sourced report"
   ],
   "completedAt": "2026-05-19T00:00:00.000Z"

@@ -140,18 +140,16 @@
 		<div class="result report">
 			<p class="eyebrow">{snapshot?.id === 'example-report' ? 'Example report' : 'Evidence report'}</p>
 			{#if report}
-				<header class="report-head">
-					<div>
-						<h2>{report.answer}</h2>
-						<p>{report.graph.evidence.length} source cards · {report.followUps.length} follow-up searches</p>
-					</div>
-					<div class="report-actions">
-						<button type="button" onclick={copyAnswer}>Copy answer</button>
-						<button type="button" onclick={downloadReport}>Download .md</button>
-					</div>
-				</header>
+				<section class="report-section asked">
+					<h3>Question</h3>
+					<p>{report.question}</p>
+				</section>
 				<section class="report-section">
-					<h3>What Argus checked</h3>
+					<h3>Angles</h3>
+					<div class="angle-list">{#each report.graph.facets as facet}<span>{facet.label}</span>{/each}</div>
+				</section>
+				<section class="report-section">
+					<h3>Evidence board</h3>
 					<div class="cards">
 						{#each firstPass as piece}
 							<article class="card">
@@ -162,11 +160,23 @@
 					</div>
 				</section>
 				<section class="report-section">
-					<h3>Follow-ups</h3>
+					<h3>Gap → follow-up</h3>
+					{#if report.graph.gaps.length}<p class="gap-note">{report.graph.gaps[0].reason}</p>{/if}
 					{#if followUpCards.length}
 						<div class="cards compact">{#each followUpCards as piece}<article class="card follow-up"><header><strong>{piece.facet}</strong></header><p>{piece.claim}</p></article>{/each}</div>
 					{:else}<p>No follow-up search was needed.</p>{/if}
 				</section>
+				<header class="report-head">
+					<div>
+						<h3>Final report</h3>
+						<h2>{report.answer}</h2>
+						<p>{report.graph.evidence.length} source cards · {report.followUps.length} follow-up searches</p>
+					</div>
+					<div class="report-actions">
+						<button type="button" onclick={copyAnswer}>Copy answer</button>
+						<button type="button" onclick={downloadReport}>Download .md</button>
+					</div>
+				</header>
 				<section class="report-section sources">
 					<h3>Sources</h3>
 					<ol>{#each sources as source}<li><a href={source.url}>{source.title}</a></li>{/each}</ol>
