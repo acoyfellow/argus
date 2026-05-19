@@ -4,7 +4,7 @@
 	const questionExamples = [
 		'How are evidence-assembly agents changing deep research systems?',
 		'What makes explore-before-act useful for real web agents?',
-		'Which recent agent papers turn dynamic workflows into a practical primitive?'
+		'Which new agent papers are actually useful to builders?'
 	];
 
 	let question = $state(questionExamples[0]);
@@ -14,7 +14,7 @@
 
 	async function runArgus() {
 		busy = true;
-		notice = 'Starting a durable Argus research workflow…';
+		notice = 'Starting Argus…';
 		snapshot = null;
 		try {
 			const response = await fetch('/api/research', {
@@ -45,13 +45,13 @@
 			await new Promise((resolve) => setTimeout(resolve, 1250));
 		}
 		busy = false;
-		notice = 'Argus is still running. Refreshing the status endpoint later will find the same workflow instance.';
+		notice = 'Argus is still working. Check back in a moment.';
 	}
 </script>
 
 <svelte:head>
 	<title>Argus — an evidence assembly harness</title>
-	<meta name="description" content="Argus is a Cloudflare-native research agent harness that grows dynamic workflows from evidence gaps." />
+	<meta name="description" content="Argus researches a question, follows the gaps, and shows its sources." />
 </svelte:head>
 
 <main>
@@ -66,20 +66,20 @@
 
 	<section class="hero">
 		<p class="eyebrow">argus.coey.dev · Cloudflare Workflows + Workers AI + live sources</p>
-		<h1>Research as an evidence board, not a transcript pile.</h1>
-		<p class="lede">Argus runs for real: one durable workflow facets a question, searches current arXiv receipts, scores evidence with Workers AI, dispatches follow-up searches when the graph exposes a gap, then synthesizes the compact board.</p>
+		<h1>Research with receipts.</h1>
+		<p class="lede">Ask a question. Argus searches, notices what is missing, follows up, and shows the sources behind its answer.</p>
 		<div class="actions">
 			<a class="primary" href="#demo">Run Argus</a>
-			<a class="secondary" href="https://github.com/acoyfellow/argus">Repository target</a>
+			<a class="secondary" href="https://github.com/acoyfellow/argus">GitHub</a>
 		</div>
 	</section>
 
-	<section class="thesis"><p><strong>Thesis.</strong> Deep research should be a dynamic workflow over a compact evidence graph, not a pile of parallel chat transcripts.</p></section>
+	<section class="thesis"><p><strong>The idea.</strong> Research should show its work.</p></section>
 
 	<section id="demo" class="demo-shell">
 		<div class="composer">
-			<p class="eyebrow">Dogfood it</p>
-			<h2>Ask one research question.</h2>
+			<p class="eyebrow">Try it</p>
+			<h2>Ask a question.</h2>
 			<label for="question">Research question</label>
 			<textarea id="question" bind:value={question} rows="4"></textarea>
 			<div class="chips">
@@ -87,7 +87,7 @@
 					<button type="button" onclick={() => (question = example)}>{example}</button>
 				{/each}
 			</div>
-			<button class="run" type="button" onclick={runArgus} disabled={busy}>{busy ? 'Researching…' : 'Start Argus workflow'}</button>
+			<button class="run" type="button" onclick={runArgus} disabled={busy}>{busy ? 'Researching…' : 'Run Argus'}</button>
 			{#if notice}<p class="notice">{notice}</p>{/if}
 		</div>
 
@@ -116,16 +116,16 @@
 			{:else}
 				<div class="empty-board">
 					<strong>The empty state is honest.</strong>
-					<p>Run the workflow and this surface fills with real facets, source receipts, gap-triggered follow-ups, and a synthesis returned by the Workflow instance.</p>
+					<p>Run Argus to see the answer, the source cards, and any follow-up searches it needed.</p>
 				</div>
 			{/if}
 		</div>
 	</section>
 
 	<section id="mechanism" class="mechanism">
-		<article><p class="eyebrow">01</p><h2>Facet</h2><p>Workers AI turns the question into three complementary lines of inquiry.</p></article>
-		<article><p class="eyebrow">02</p><h2>Search</h2><p>The workflow fetches live arXiv results and converts receipts into bounded evidence cards.</p></article>
-		<article><p class="eyebrow">03</p><h2>Dispatch again</h2><p>Low coverage or thin receipts become targeted follow-up steps, created during the run.</p></article>
-		<article><p class="eyebrow">04</p><h2>Synthesize</h2><p>The final answer sees the graph, not a sprawling transcript soup.</p></article>
+		<article><p class="eyebrow">01</p><h2>Split</h2><p>Break the question into a few useful angles.</p></article>
+		<article><p class="eyebrow">02</p><h2>Search</h2><p>Find live papers and keep the links.</p></article>
+		<article><p class="eyebrow">03</p><h2>Follow up</h2><p>If the evidence is thin, search again on purpose.</p></article>
+		<article><p class="eyebrow">04</p><h2>Answer</h2><p>Write from the source cards, not from a blob of chat.</p></article>
 	</section>
 </main>
