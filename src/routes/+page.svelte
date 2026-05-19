@@ -113,15 +113,9 @@
 			<p class="eyebrow">How it works</p>
 			<h2>The gaps decide the next search.</h2>
 		</div>
-		<div class="loop">
-			<div class="loop-node"><span>01</span><strong>Question</strong><p>Start with one ask.</p></div>
-			<div class="loop-arrow">→</div>
-			<div class="loop-node"><span>02</span><strong>Search</strong><p>Collect source cards.</p></div>
-			<div class="loop-arrow loop-turn">↺</div>
-			<div class="loop-node loop-gap"><span>03</span><strong>Gap?</strong><p>Thin evidence gets a follow-up search.</p></div>
-			<div class="loop-arrow">→</div>
-			<div class="loop-node"><span>04</span><strong>Report</strong><p>Answer with receipts.</p></div>
-		</div>
+		<figure class="loop-art">
+			<img src="/diagrams/argus-loop.svg" alt="Question flows to angles, evidence search, an evidence board, follow-up searches for gaps, and a sourced report." />
+		</figure>
 	</section>
 
 	<section id="demo" class="demo-shell">
