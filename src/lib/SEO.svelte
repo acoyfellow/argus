@@ -1,6 +1,6 @@
 <script lang="ts">
 	const title = 'Argus — research with receipts';
-	const description = 'Argus researches a question, follows the gaps, and shows its sources.';
+	const description = 'A sourced web research agent that gathers evidence, follows weak spots, and returns a clear report with links.';
 	const canonical = 'https://argus.coey.dev/';
 	const image = 'https://argus.coey.dev/og/argus.png';
 </script>
@@ -8,7 +8,7 @@
 <svelte:head>
 	<title>{title}</title>
 	<meta name="description" content={description} />
-	<meta name="keywords" content="research agent, evidence agent, Cloudflare Workflows, Workers AI, arXiv" />
+	<meta name="keywords" content="web research agent, sourced research, evidence agent, Cloudflare Workflows, Workers AI" />
 	<meta name="author" content="argus.coey.dev" />
 	<link rel="canonical" href={canonical} />
 

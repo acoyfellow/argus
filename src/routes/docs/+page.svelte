@@ -1,20 +1,14 @@
 <script lang="ts">
 	import SEO from '$lib/SEO.svelte';
-
-	const title = 'Argus — docs';
-	const description = 'How Argus runs: deploy it, run it locally, and read the gap-triggered follow-up loop.';
-	const canonical = 'https://argus.coey.dev/docs';
 </script>
 
 <svelte:head>
-	<title>{title}</title>
-	<meta name="description" content={description} />
-	<link rel="canonical" href={canonical} />
-	<meta property="og:title" content={title} />
-	<meta property="og:description" content={description} />
-	<meta property="og:type" content="article" />
-	<meta property="og:url" content={canonical} />
+	<title>Argus — docs</title>
+	<meta name="description" content="Run Argus locally, deploy it to Cloudflare, and see the evidence-gap loop in code." />
+	<link rel="canonical" href="https://argus.coey.dev/docs" />
 </svelte:head>
+
+<SEO />
 
 <main>
 	<nav class="nav" aria-label="Primary">
@@ -27,110 +21,77 @@
 		</div>
 	</nav>
 
-	<section class="hero">
-		<p class="eyebrow">Docs · run Argus on your account</p>
-		<h1>What Argus does. How to run it.</h1>
-		<p class="lede">Argus researches one question. It searches live papers, follows weak spots, and returns an answer with sources. It runs as one Cloudflare Worker with one durable Workflow.</p>
+	<section class="hero docs-hero">
+		<p class="eyebrow">Docs</p>
+		<h1>Run Argus. Read the loop. Change the model.</h1>
+		<p class="lede">Argus is one Worker with one durable Workflow. It gathers sources, follows weak spots, and returns a report with links.</p>
 		<div class="actions">
-			<a class="primary" href="#run">Run it</a>
-			<a class="secondary" href="#loop">Read the loop</a>
+			<a class="primary" href="#run">Run locally</a>
+			<a class="secondary" href="#loop">See the code</a>
 		</div>
 	</section>
 
-	<section class="thesis"><p><strong>The shape.</strong> One Worker. One Workflow. Workers AI. Live paper links.</p></section>
+	<section class="docs-stack">
+		<article id="run" class="docs-card">
+			<div>
+				<p class="eyebrow">01 · Local</p>
+				<h2>Run it on your machine.</h2>
+				<p>This builds the Worker and runs it locally. Workers AI still calls the real binding in your Cloudflare account.</p>
+			</div>
+			<iframe class="code-frame" title="Local commands" src="/docs/local.html"></iframe>
+		</article>
 
-	<section id="run" class="docs-section">
-		<div class="docs-copy">
-			<p class="eyebrow">01 · Local</p>
-			<h2>Run it on your machine.</h2>
-			<p>This builds the Worker and runs it locally. Workers AI still calls the real binding in your Cloudflare account.</p>
-		</div>
-		<iframe class="code-frame" title="Local commands" src="/docs/local.html"></iframe>
+		<article class="docs-card">
+			<div>
+				<p class="eyebrow">02 · Deploy</p>
+				<h2>Ship it to your account.</h2>
+				<p>Use the Deploy to Cloudflare button in the README, or run the same steps yourself.</p>
+			</div>
+			<iframe class="code-frame small" title="Deploy commands" src="/docs/deploy.html"></iframe>
+		</article>
+
+		<article id="loop" class="docs-card">
+			<div>
+				<p class="eyebrow">03 · The loop</p>
+				<h2>Weak evidence creates the next search.</h2>
+				<p>This is the core idea. Find thin spots, search again on purpose, then write the report from the board.</p>
+			</div>
+			<iframe class="code-frame tall" title="Gap-triggered workflow snippet" src="/docs/loop.html"></iframe>
+		</article>
+
+		<article class="docs-card model-card">
+			<div>
+				<p class="eyebrow">04 · Model</p>
+				<h2>Set one Workers AI model.</h2>
+				<p><code>ARGUS_MODEL</code> controls the model used for source analysis and synthesis. The default is <code>@cf/moonshotai/kimi-k2.6</code>.</p>
+			</div>
+			<pre class="plain-code"><code>{`"vars": {
+  "ARGUS_MODEL": "@cf/moonshotai/kimi-k2.6"
+}`}</code></pre>
+		</article>
 	</section>
 
-	<section class="docs-section">
-		<div class="docs-copy">
-			<p class="eyebrow">02 · Deploy</p>
-			<h2>Ship it to your account.</h2>
-			<p>Deploy the site, API, and Workflow together. Use the button in the README, or run these commands.</p>
-		</div>
-		<iframe class="code-frame small" title="Deploy commands" src="/docs/deploy.html"></iframe>
-	</section>
-
-	<section id="loop" class="docs-section">
-		<div class="docs-copy">
-			<p class="eyebrow">03 · The loop</p>
-			<h2>Gaps decide the next search.</h2>
-			<p>This is the paper idea in code. Weak evidence creates the next search. The answer reads the board, not a pile of chat.</p>
-		</div>
-		<iframe class="code-frame tall" title="Gap-triggered workflow snippet" src="/docs/loop.html"></iframe>
-	</section>
-
-	<section class="diagram" aria-label="The Argus loop">
-		<div class="diagram-copy">
-			<p class="eyebrow">At a glance</p>
-			<h2>One question, one durable run.</h2>
-		</div>
-		<div class="loop">
-			<div class="loop-node"><span>01</span><strong>Facets</strong><p>Split the question into lines of inquiry.</p></div>
-			<div class="loop-arrow">→</div>
-			<div class="loop-node"><span>02</span><strong>Search</strong><p>Live arXiv receipts, bounded traces.</p></div>
-			<div class="loop-arrow loop-turn">↺</div>
-			<div class="loop-node loop-gap"><span>03</span><strong>Gap?</strong><p>Thin coverage triggers a follow-up search.</p></div>
-			<div class="loop-arrow">→</div>
-			<div class="loop-node"><span>04</span><strong>Synthesize</strong><p>Read the board. Return the answer with sources.</p></div>
-		</div>
-	</section>
-
-	<section class="docs-section last">
-		<div class="docs-copy">
-			<p class="eyebrow">More</p>
-			<h2>Where to read next.</h2>
-			<p>The <a href="https://github.com/acoyfellow/argus">README</a> covers the single-Worker shape and the deploy button. <a href="https://github.com/acoyfellow/argus/blob/main/docs/architecture.md">docs/architecture.md</a> explains the executable boundary and the paper mechanism Argus remixes. The <a href="https://arxiv.org/abs/2605.16217">arXiv paper</a> is the source of the evidence-assembly idea.</p>
-		</div>
-		<div class="docs-aside">
-			<a class="primary big" href="/">Try the live demo →</a>
-		</div>
+	<section class="docs-footer">
+		<a class="primary docs-cta" href="/">Try the live demo</a>
+		<a href="https://github.com/acoyfellow/argus/blob/main/docs/architecture.md">Read the architecture note</a>
 	</section>
 </main>
 
-<SEO />
-
 <style>
-	.docs-section {
-		display: grid;
-		grid-template-columns: minmax(220px, .55fr) minmax(0, 1.45fr);
-		gap: clamp(18px, 4vw, 48px);
-		padding: 28px 0;
-		border-bottom: 1.5px solid #101010;
-	}
-	.docs-section.last { border-bottom: 3px solid #101010; }
-	.docs-copy h2 { max-width: 360px; margin: 0 0 12px; }
-	.docs-copy p { margin: 0; color: rgba(16,16,16,.8); line-height: 1.5; }
-	.code-frame {
-		width: 100%;
-		height: 238px;
-		margin: 0;
-		border: 2px solid #101010;
-		border-radius: 18px;
-		background: #24292e;
-	}
-	.code-frame.small { height: 138px; }
-	.code-frame.tall { height: 304px; }
-	.docs-aside { display: grid; align-content: start; }
-	.docs-aside .primary.big {
-		display: inline-block;
-		padding: 14px 22px;
-		border: 2px solid #101010;
-		border-radius: 999px;
-		background: #101010;
-		color: #f3efef;
-		text-decoration: none;
-		font-weight: 600;
-	}
-	.nav-links a[aria-current='page'] { background: #101010; color: #f3efef; }
-
-	@media (max-width: 920px) {
-		.docs-section { grid-template-columns: 1fr; }
-	}
+	.nav-links a[aria-current='page'] { background:#17191d; color:#fffdf9; }
+	.docs-hero { border-bottom:2px solid #17191d; }
+	.docs-stack { display:grid; gap:22px; padding:42px 0; }
+	.docs-card { display:grid; gap:24px; padding:30px; border:1px solid #d8d1c6; border-radius:28px; background:#fffdf9; box-shadow:0 18px 48px rgba(23,25,29,.06); }
+	.docs-card h2 { margin-bottom:12px; }
+	.docs-card p { max-width:820px; margin-bottom:0; color:#3f434b; }
+	.code-frame { width:100%; height:238px; margin:0; border:2px solid #17191d; border-radius:20px; background:#24292e; }
+	.code-frame.small { height:138px; }
+	.code-frame.tall { height:304px; }
+	.plain-code { margin:0; padding:22px; overflow-x:auto; border:2px solid #17191d; border-radius:20px; background:#24292e; color:#fffdf9; font-size:.95rem; line-height:1.6; }
+	.plain-code code, .model-card code { font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+	.model-card p code { padding:2px 6px; border-radius:8px; background:#eef3ff; color:#1746b8; }
+	.docs-footer { display:flex; flex-wrap:wrap; align-items:center; gap:18px; padding:4px 0 24px; }
+	.docs-footer a { color:#1746b8; font-weight:700; text-underline-offset:4px; }
+	.docs-footer .docs-cta { display:inline-flex; min-height:52px; align-items:center; padding:12px 20px; border:2px solid #17191d; border-radius:999px; background:#17191d; color:#fffdf9; text-decoration:none; }
+	@media (max-width:680px) { .docs-card { padding:22px; border-radius:22px; } }
 </style>

@@ -1,13 +1,13 @@
 # Argus
 
-**An evidence-assembly research agent running on Cloudflare Workflows.**
+**A sourced web research agent running on Cloudflare Workflows.**
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/acoyfellow/argus)
 
-- **Demo:** [argus.coey.dev](https://argus.coey.dev) · fallback live Worker: [argus.coy.workers.dev](https://argus.coy.workers.dev)
+- **Demo:** [argus.coey.dev](https://argus.coey.dev)
 - **Paper:** [*Argus: Evidence Assembly for Scalable Deep Research Agents*](https://arxiv.org/abs/2605.16217)
 
-`argus.coey.dev` is the public docs, demo, and dogfood surface for Argus. It remixes the May 2026 arXiv paper into a real utility: ask a question, start a durable workflow, build facets, fetch current arXiv source receipts, let Workers AI assemble evidence cards, dynamically dispatch follow-up searches for thin coverage, and synthesize the compact evidence board.
+`argus.coey.dev` is the public docs, demo, and dogfood surface for Argus. Ask a question. Argus gathers evidence, checks weak spots, follows up where needed, and returns a report with links. The evidence-loop idea is inspired by the May 2026 Argus paper; the product is source-agnostic web research.
 
 ## What runs
 
@@ -15,28 +15,26 @@
 |---|---|
 | `src/routes/+page.svelte` | Public demo UI and evidence-board renderer |
 | `src/routes/api/research/` | Starts and polls Workflow instances |
-| `src/worker.ts` | `ArgusResearchWorkflow`, the durable adaptive loop |
-| `src/lib/argus/` | Prompts, evidence graph model, live source fetch, synthesis |
+| `src/workflow-runtime.ts` | `ArgusResearchWorkflow`, the durable adaptive loop |
+| `src/lib/argus/` | Prompts, evidence report model, source fetch, synthesis |
 | `research/` | Paper notes and product reasoning receipts |
-
-No placeholder harness directory: the harness is the executable Workflow and its API/UI loop.
 
 ## Cloudflare primitives
 
 - **Workflows** — one durable research run; graph gaps create later follow-up steps.
 - **Workers AI** — facet generation, evidence extraction, and final synthesis.
 - **SvelteKit on Workers** — public docs/demo surface and Workflow API.
-- **Live fetch** — arXiv API receipts are real sources, not fixtures.
+- **Live sources** — the search layer gathers source receipts; the example report shows mixed public web sources.
 
 ## Run locally
 
-Run the full local multi-Worker system through Wrangler so real local Workflows + remote Workers AI execute against your authenticated Cloudflare account.
+Run the app through Wrangler so local Workflows + remote Workers AI execute against your authenticated Cloudflare account.
 
 ```bash
 bun run dev
 ```
 
-Open `http://localhost:4173`, then click **Start Argus workflow**. If you only need rapid visual CSS/Svelte iteration without the Workflow API, `bun run dev:ui` starts plain Vite.
+Open `http://localhost:4173`, then click **Start research**. If you only need rapid visual CSS/Svelte iteration without the Workflow API, `bun run dev:ui` starts plain Vite.
 
 ## Validate
 
@@ -45,7 +43,7 @@ bun run check
 bun run build
 ```
 
-`check` refreshes Wrangler types, clears generated build artifacts that confuse the scaffold's JS checking after a prior build, then runs Svelte type checking. `build` creates the SvelteKit Worker bundle and dry-runs the separate Workflow Worker deploy.
+`check` runs Svelte type checking. `build` creates the deployable Worker bundle, generates docs/code assets, and dry-runs Wrangler deploy.
 
 ## Deploy
 
@@ -64,4 +62,4 @@ wrangler deploy
 
 ## Thesis
 
-> Deep research should be a dynamic workflow over a compact evidence graph, not a pile of parallel chat transcripts.
+> Research should show its work.
