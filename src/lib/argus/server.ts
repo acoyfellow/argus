@@ -11,9 +11,16 @@ import type {
 
 interface AiEnv {
 	AI: Ai;
+	ARGUS_MODEL?: string;
+	ARGUS_FALLBACK_MODEL?: string;
 }
 
-const MODELS = ['@cf/moonshotai/kimi-k2.6', '@cf/meta/llama-4-scout-17b-16e-instruct'] as const;
+export const DEFAULT_MODEL = '@cf/moonshotai/kimi-k2.6';
+export const DEFAULT_FALLBACK_MODEL = '@cf/meta/llama-4-scout-17b-16e-instruct';
+
+export function configuredModels(env: Pick<AiEnv, 'ARGUS_MODEL' | 'ARGUS_FALLBACK_MODEL'>): string[] {
+	return [...new Set([env.ARGUS_MODEL || DEFAULT_MODEL, env.ARGUS_FALLBACK_MODEL || DEFAULT_FALLBACK_MODEL].filter(Boolean))];
+}
 const ARXIV_API = 'https://export.arxiv.org/api/query';
 
 export async function buildFacets(question: string, env: AiEnv): Promise<Facet[]> {
@@ -209,7 +216,7 @@ async function runJson<T>(env: AiEnv, prompt: string): Promise<T | null> {
 
 async function runText(env: AiEnv, prompt: string): Promise<string> {
 	let lastError: unknown;
-	for (const model of MODELS) {
+	for (const model of configuredModels(env)) {
 		try {
 			const raw = await env.AI.run(model, {
 				messages: [{ role: 'user', content: prompt }],

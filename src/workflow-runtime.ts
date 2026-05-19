@@ -11,6 +11,8 @@ import type { ArgusOutput, ResearchRequest, SearchReport } from '$lib/argus/type
 
 interface Env {
 	AI: Ai;
+	ARGUS_MODEL?: string;
+	ARGUS_FALLBACK_MODEL?: string;
 }
 
 export async function runArgusResearch(

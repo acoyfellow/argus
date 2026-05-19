@@ -12,6 +12,10 @@
 		"directory": ".svelte-kit/cloudflare"
 	},
 	"ai": { "binding": "AI" },
+	"vars": {
+		"ARGUS_MODEL": "@cf/moonshotai/kimi-k2.6",
+		"ARGUS_FALLBACK_MODEL": "@cf/meta/llama-4-scout-17b-16e-instruct"
+	},
 	"workflows": [
 		{
 			"name": "argus-research",

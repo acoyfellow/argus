@@ -1,6 +1,9 @@
 <script lang="ts">
 	import SEO from '$lib/SEO.svelte';
+	import type { PageData } from './$types';
 	import type { WorkflowSnapshot } from '$lib/argus/types';
+
+	let { data }: { data: PageData } = $props();
 
 	const questionExamples = [
 		'How are evidence-assembly agents changing deep research systems?',
@@ -89,6 +92,7 @@
 		<div class="nav-links">
 			<a href="#demo">Live demo</a>
 			<a href="#mechanism">Mechanism</a>
+			<a href="/docs">Docs</a>
 			<a href="https://arxiv.org/abs/2605.16217">Paper</a>
 		</div>
 	</nav>
@@ -125,6 +129,7 @@
 		<div class="composer">
 			<p class="eyebrow">Try it</p>
 			<h2>Ask a question.</h2>
+			<p class="model-note">Workers AI: {data.models[0]}{#if data.models[1]} · fallback: {data.models[1]}{/if}</p>
 			<label for="question">Research question</label>
 			<textarea id="question" bind:value={question} rows="4"></textarea>
 			<div class="chips">
