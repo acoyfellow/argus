@@ -99,26 +99,24 @@
 		</div>
 	</nav>
 
-	<section class="hero">
+	<section class="hero report-intro">
 		<p class="eyebrow">Cloudflare Workflows + Workers AI + live sources</p>
 		<h1>Research with receipts.</h1>
-		<p class="lede">Ask a question. Argus gathers evidence, checks what is missing, and returns a clear report with sources.</p>
+		<p class="lede">Argus gathers evidence, checks weak spots, and returns a report you can inspect. It is built for questions where a plain one-shot answer is not enough.</p>
 		<div class="actions">
 			<a class="primary" href="#demo">Start research</a>
 			<a class="secondary" href="https://github.com/acoyfellow/argus">GitHub</a>
 		</div>
 	</section>
 
-	<section class="thesis"><p><strong>The idea.</strong> Research should show its work.</p></section>
-
-	<section id="mechanism" class="diagram" aria-label="How Argus works">
-		<div class="diagram-copy">
-			<p class="eyebrow">How it works</p>
-			<h2>The gaps decide the next search.</h2>
+	<section class="report-primer" aria-label="What an Argus report contains">
+		<p class="eyebrow">What the report shows</p>
+		<div class="primer-list">
+			<article><strong>Question</strong><p>The exact ask Argus researched.</p></article>
+			<article><strong>Evidence</strong><p>The claims it could support with sources.</p></article>
+			<article><strong>Follow-ups</strong><p>What it checked again when the first pass was thin.</p></article>
+			<article><strong>Sources</strong><p>The links behind the final answer.</p></article>
 		</div>
-		<figure class="loop-art">
-			<img src="/diagrams/argus-loop.svg" alt="Question flows to angles, evidence search, an evidence board, follow-up searches for gaps, and a sourced report." />
-		</figure>
 	</section>
 
 	<section id="demo" class="demo-shell">
