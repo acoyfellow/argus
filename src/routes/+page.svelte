@@ -176,9 +176,10 @@
 				</section>
 				<details class="run-details"><summary>Run trace</summary><div class="trace">{#each report.trace as item}<span>{item}</span>{/each}</div></details>
 			{:else}
-				<div class="empty-board">
-					<strong>The empty state is honest.</strong>
-					<p>Run Argus to see the answer, the source cards, and any follow-up searches it needed.</p>
+				<div class="empty-board" aria-label="Waiting for an Argus report">
+					<div class="empty-orbit"></div>
+					<div class="empty-sheet"></div>
+					<div class="empty-loop"></div>
 				</div>
 			{/if}
 		</div>
