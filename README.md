@@ -2,7 +2,10 @@
 
 **An evidence-assembly research agent running on Cloudflare Workflows.**
 
-`argus.coey.dev` is the public docs, demo, and dogfood surface for Argus. It remixes [*Argus: Evidence Assembly for Scalable Deep Research Agents*](https://arxiv.org/abs/2605.16217) into a real utility: ask a question, start a durable workflow, build facets, fetch current arXiv source receipts, let Workers AI assemble evidence cards, dynamically dispatch follow-up searches for thin coverage, and synthesize the compact evidence board.
+- **Demo:** [argus.coey.dev](https://argus.coey.dev) · fallback live Worker: [argus.coy.workers.dev](https://argus.coy.workers.dev)
+- **Paper:** [*Argus: Evidence Assembly for Scalable Deep Research Agents*](https://arxiv.org/abs/2605.16217)
+
+`argus.coey.dev` is the public docs, demo, and dogfood surface for Argus. It remixes the May 2026 arXiv paper into a real utility: ask a question, start a durable workflow, build facets, fetch current arXiv source receipts, let Workers AI assemble evidence cards, dynamically dispatch follow-up searches for thin coverage, and synthesize the compact evidence board.
 
 ## What runs
 
